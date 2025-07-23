@@ -9,6 +9,13 @@ public class PlayerAvatarView : MonoBehaviour
     private CinemachineCamera cinemachineCamera;
     [SerializeField]
     private TextMeshPro nameLabel;
+    
+    private Camera mainCamera;
+
+    private void Start()
+    {
+        mainCamera = Camera.main;
+    }
 
     public void MakeCameraTarget()
     {
@@ -23,7 +30,10 @@ public class PlayerAvatarView : MonoBehaviour
     private void LateUpdate()
     {
         // プレイヤー名のテキストを、ビルボード（常にカメラ正面向き）にする
-        nameLabel.transform.rotation = Camera.main.transform.rotation;
+        if (mainCamera != null)
+        {
+            nameLabel.transform.rotation = mainCamera.transform.rotation;
+        }
     }
 
 }
